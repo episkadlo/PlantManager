@@ -1,5 +1,8 @@
 from django.contrib import admin
-from manager.models import Plants
+from manager.models import Plant
 
 # Register your models here.
-admin.site.register(Plants)
+class PlantAdmin(admin.ModelAdmin):
+    exclude = ('slug',)
+
+admin.site.register(Plant, PlantAdmin)
