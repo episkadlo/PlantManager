@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block body_block%}
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-4  ">
+                <a href=" {% url 'manager:createPlant' %}">
+                    Add new plant
+                </a>
+                <br>
+                <hr>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-4  ">
+                <h3>Your plants:</h3>
+                <br>
+                    <form method="POST" action="{% url 'manager:waterPlants' %}">
+                        {% csrf_token %}
+                        {% for plant in users_plants %}
+                            <li> Plant: {{ plant.name }}</li>
+                            <li> Location: {{plant.location }}</li>
+                            <li> Last watered: {{ plant.last_water }}</li>
+                            <li> Water next: {{plant.next_water }} </li>
+                            <li> PK: {{plant.pk}} </li>
+                            <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Water me!
+                            <hr>
+                            <br>
+                        {% empty %}
+                            <li>No plants added yet!</li>
+                        {% endfor %}
+                            <input type="submit" class='btn btn-info align-self-center mx-auto' value="Update">
+                    </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block body_block%}
+
+
+
+<div class='container'>
+
+    <h3>User settings</h3>
+    <a href="#">
+        Change your password
+    </a>
+
+</div>
+
+<br>
+
+<div class='container'>
+
+    <h3>Your locations</h3>
+    <br> 
+
+    <h4>Current locations:</h4>
+
+    <ul>
+    {% if current_locations %}
+        {% for loc in current_locations %}
+        <li>{{loc.room}} 
+            <a class="btn btn-outline-success btn-sm" href="#" role="button"> Edit </a> 
+            <a class="btn btn-outline-danger btn-sm" href="#" role="button"> Delete </a>
+        </li>
+        <br>
+        {% endfor %}
+    </ul>
+
+    {% else %}
+        <p>No location registered yet!</p>
+        
+    {% endif %}
+
+    <br>
+
+    <h4>Add new location:</h4>
+    <form action="{% url 'manager:settings' %}" method='POST'>
+        {% csrf_token %}
+
+        {{ formset.as_p }} 
+
+        <input type="submit" class='btn btn-info align-self-center mx-auto' value="Add">
+
+    </form>
+    
+</div>
+
+{% endblock %}
+
