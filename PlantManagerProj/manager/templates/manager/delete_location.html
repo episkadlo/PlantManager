@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap4 i18n%}
+
+{% block body_block%}
+
+<div class="container">
+    <h2>{% trans "DELETE Location" %}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p> {% trans "Are you sure you want to delete {{object}} and all plants it contains? %}</p>
+        <p>If you wish to keep the plants, pleasego back edit them to relocate them to another location first! </p>
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'manager:settings' %}" role="button"> Cancel </a>
+        <input type="submit" class='btn btn-info align-self-center mx-auto' value="Confirm">
+    </form>
+</div>
+
+{% endblock %}

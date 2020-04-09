@@ -15,5 +15,8 @@ urlpatterns = [
         ),
     url(r'^signup/$',
         views.SignUp.as_view(),
-        name='signup')]
-    
+        name='signup'),
+    url(r'^change_password/$',
+        auth_views.PasswordChangeView.as_view(template_name='accounts/change_password.html'),
+        name='change_password')
+        ]

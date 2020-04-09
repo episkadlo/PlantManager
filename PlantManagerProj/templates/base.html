@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{% load static i18n %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -21,26 +21,26 @@
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
               <li class="navbar-item">
-                <a class="nav-link navbar-custom" href="#"><b>About</b></a>
+                <a class="nav-link navbar-custom" href="#"><b>{% trans "About" %}</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navbar-custom" href=" {% url 'manager:list' %}"><b>Manage your plants</b></a>
+                <a class="nav-link navbar-custom" href=" {% url 'manager:list' %}"><b>{% trans "Your plants %}</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navbar-custom" href="{%url 'manager:settings'%}"><b>Settings</b></a>
+                <a class="nav-link navbar-custom" href="{%url 'manager:settings'%}"><b>{% trans "Settings" %}</b></a>
               </li>
               <li class="navbar-item">
-                <a class="nav-link navbar-custom" href="{% url 'accounts:logout' %}"><b>Log Out</b></a>
+                <a class="nav-link navbar-custom" href="{% url 'accounts:logout' %}"><b>{% trans "Log Out" %}</b></a>
               </li>
           {% else %}
               <li class="navbar-item">
-                <a class="nav-link navbar-custom" href="#"><b>About</b></a>
+                <a class="nav-link navbar-custom" href="#"><b>{% trans "About" %}</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navbar-custom" href="{% url 'accounts:login' %}">Log In</a>
+                <a class="nav-link navbar-custom" href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link navbar-custom" href="{% url 'accounts:signup' %}">Sign Up</a>
+                <a class="nav-link navbar-custom" href="{% url 'accounts:signup' %}">{% trans "Sign up" %}</a>
               </li>
           {% endif %} 
         </ul>

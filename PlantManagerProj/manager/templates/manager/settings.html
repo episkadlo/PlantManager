@@ -8,9 +8,8 @@
 <div class='container'>
 
     <h3>User settings</h3>
-    <a href="#">
-        Change your password
-    </a>
+        <p>Change your password: <a href="{% url 'accounts:change_password' %}">click here</a></p>
+
 
 </div>
 
@@ -27,8 +26,8 @@
     {% if current_locations %}
         {% for loc in current_locations %}
         <li>{{loc.room}} 
-            <a class="btn btn-outline-success btn-sm" href="#" role="button"> Edit </a> 
-            <a class="btn btn-outline-danger btn-sm" href="#" role="button"> Delete </a>
+            <a class="btn btn-outline-success btn-sm" href="{% url 'manager:editLoc' pk=loc.pk %}" role="button"> Edit </a> 
+            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deleteLoc' pk=loc.pk %}" role="button"> Delete </a>
         </li>
         <br>
         {% endfor %}

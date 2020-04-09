@@ -1,13 +1,15 @@
-from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, TemplateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from datetime import date
+from django.shortcuts import render, get_object_or_404
+from datetime import date, timedelta
+from django.db.models import F
 
 from .models import Plant, Location
-from .forms import PlantCreateForm
-from django.forms import modelformset_factory
+from .forms import PlantCreateForm, PlantEditForm
+from django.forms import modelformset_factory, ValidationError
 
 
 # Create your views here.
@@ -23,31 +25,41 @@ class DetailPlant(LoginRequiredMixin, DetailView):
 #     def get_queryset(self):
 #         return Plant.objects.filter(owner=self.request.user)
 
+@login_required
 def ListPlants(request):
     users_plants = Plant.objects.filter(owner=request.user)
-    return render(request, 'manager/list_plants.html', {'users_plants':users_plants})
+
+    takeCareOf_id = [x.id for x in Plant.objects.filter(owner=request.user) if x.next_water < date.today() or x.next_fertilize < date.today() ]
+    takeCareOf = Plant.objects.filter(id__in=takeCareOf_id)
+    
+    upToDate_id = [x.id for x in Plant.objects.filter(owner=request.user) if x.next_water >= date.today() and x.next_fertilize >= date.today()]
+    upToDate = Plant.objects.filter(id__in=upToDate_id)
+
+    return render(request, 'manager/list_plants.html', {'users_plants':users_plants, 'upToDate':upToDate, 'takeCareOf':takeCareOf})
 
 def waterPlants(request):
     #print(form_plants)
-    pk_list=request.POST.getlist('water_me')
-    plants_to_water = Plant.objects.filter(pk__in=pk_list)
+    pk_water=request.POST.getlist('water_me')
+    plants_to_water = Plant.objects.filter(pk__in=pk_water)
     #print(plants_to_water)
-    for temp_pk in pk_list:
+    for temp_pk in pk_water:
         temp_plant = Plant.objects.get(pk=temp_pk)
         temp_plant.last_water = date.today()
         temp_plant.save()
+
+    pk_fertilize=request.POST.getlist('fertilize_me')
+    plants_to_fertilize = Plant.objects.filter(pk__in=pk_fertilize)
+    for temp_pk in pk_fertilize:
+        temp_plant = Plant.objects.get(pk=temp_pk)
+        temp_plant.last_fertilize = date.today()
+        temp_plant.save()
+        
     return HttpResponseRedirect(reverse('manager:list'))
 
 class CreatePlant(LoginRequiredMixin, CreateView):
     template_name = 'manager/createPlant.html'
     model = Plant
     form_class = PlantCreateForm
-    # fields = ('name', 
-    #         'description',
-    #         'location', 
-    #         'plant_image', 
-    #         'last_water', 
-    #         'water_every')
 
     def get_form_kwargs(self):
         kwargs = super(CreatePlant, self).get_form_kwargs()
@@ -61,7 +73,7 @@ class CreatePlant(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-
+@login_required
 def Settings(request):
 
     current_locations = Location.objects.filter(owner=request.user)
@@ -75,21 +87,51 @@ def Settings(request):
                 for object in formset.deleted_objects:
                     object.delete()
                 for new_instance in new_instances:
-                    new_instance.owner = request.user
-                    new_instance.save()
+                    if Location.objects.filter(room = new_instance, owner=request.user).exists():
+                        raise ValidationError("This location already exists")
+                    else:
+                        new_instance.owner = request.user
+                        new_instance.save()
 
     formset = testFormSet(queryset=Location.objects.none())
 
     return render(request, 'manager/settings.html', {"formset" : formset, "current_locations" : current_locations})
 
 
-
 class PlantEdit(LoginRequiredMixin, UpdateView):
-    fields = ('name', 
-            'description',
-            'location', 
-            'plant_image', 
-            'last_water', 
-            'water_every')
+
     model = Plant
     template_name = 'manager/edit_plant.html'
+    success_url = ''
+    form_class = PlantEditForm
+
+
+    def get_object(self, *args, **kwargs):
+        edited_plant = get_object_or_404(Plant, slug=self.kwargs['slug'])
+        print(edited_plant)
+        return edited_plant
+
+    def get_form_kwargs(self):
+        kwargs = super(PlantEdit, self).get_form_kwargs()
+        kwargs.update({'user' : self.request.user})
+        return kwargs
+
+class PlantDelete(LoginRequiredMixin, DeleteView):
+    model = Plant
+    template_name = 'manager/delete_plant.html'
+    success_url = reverse_lazy('manager:list')
+
+
+class LocationDelete(LoginRequiredMixin, DeleteView):
+    model = Location
+    template_name = 'manager/delete_location.html'
+    success_url = reverse_lazy('manager:settings')
+
+
+
+class LocationEdit(LoginRequiredMixin, UpdateView):
+
+    model = Location
+    fields = ['room',]
+    template_name = 'manager/edit_location.html'
+    success_url = reverse_lazy('manager:settings')

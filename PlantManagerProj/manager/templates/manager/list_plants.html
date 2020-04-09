@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap4 %}
+{% load bootstrap4 i18n %}
 
 {% block body_block%}
 
@@ -7,7 +7,7 @@
         <div class="row justify-content-md-center">
             <div class="col col-lg-4  ">
                 <a href=" {% url 'manager:createPlant' %}">
-                    Add new plant
+                    {% trans "Add new plant" %}
                 </a>
                 <br>
                 <hr>
@@ -18,17 +18,49 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col col-lg-4  ">
-                <h3>Your plants:</h3>
-                <br>
+                {% if users_plants %}
                     <form method="POST" action="{% url 'manager:waterPlants' %}">
                         {% csrf_token %}
-                        {% for plant in users_plants %}
+                        <h3>{% trans "Take care of:" %}</h3>
+                        {% blocktrans %}
+                        {% for plant in takeCareOf %}
+                            <li> Plant: {{ plant.name }}</li>
+                            <li> Location: {{plant.location.room}}</li>
+                            <li> Last watered: {{ plant.last_water }}</li>
+                            <li> Water next on: {{plant.next_water }} </li>
+                            <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Water me!
+                            <li> Last watered: {{ plant.last_fertilize }}</li>
+                            <li> Fertilize next on: {{plant.next_fertilize }} </li>
+                            <input type="checkbox" name="fertilize_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Fertilize me!
+                            <br>
+                            <a class="btn btn-outline-info btn-sm" href="{% url 'manager:editPlant' slug=plant.slug %}" role="button"> Edit </a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deletePlant' slug=plant.slug %}" role="button"> Delete </a>
+                            <hr>
+                            <br>
+                        {% endblocktrans %}
+                        {% empty %}
+                            <li>{% trans "All your plants are up to date!" %}</li>
+                        {% endfor %}
+
+                        <br>
+                        <hr>
+                        <hr>
+                        <br>
+                        
+                        <h3>Up to date:</h3>
+                        {% for plant in upToDate %}
                             <li> Plant: {{ plant.name }}</li>
                             <li> Location: {{plant.location }}</li>
+                            <li> Slug: {{plant.slug }}</li>                           
                             <li> Last watered: {{ plant.last_water }}</li>
-                            <li> Water next: {{plant.next_water }} </li>
-                            <li> PK: {{plant.pk}} </li>
+                            <li> Water next on: {{plant.next_water }} </li>
                             <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Water me!
+                            <li> Last watered: {{ plant.last_fertilize }}</li>
+                            <li> Fertilize next on: {{plant.next_fertilize }} </li>
+                            <input type="checkbox" name="fertilize_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Fertilize me!
+                            <br>
+                            <a class="btn btn-outline-info btn-sm" href="{% url 'manager:editPlant' slug=plant.slug %}" role="button"> Edit </a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deletePlant' slug=plant.slug %}" role="button"> Delete </a>
                             <hr>
                             <br>
                         {% empty %}
@@ -36,6 +68,9 @@
                         {% endfor %}
                             <input type="submit" class='btn btn-info align-self-center mx-auto' value="Update">
                     </form>
+                {% else %}
+                    <h4>No plants added yet!</h4>
+                {% endif %}
             </div>
         </div>
     </div>

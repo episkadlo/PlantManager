@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block body_block%}
+
+<div class="container">
+    <h2>DELETE PLANT</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p> Are you sure you want to delete {{object}}?</p>
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'manager:list' %}" role="button"> Cancel </a>
+        <input type="submit" class='btn btn-info align-self-center mx-auto' value="Confirm">
+    </form>
+</div>
+
+{% endblock %}

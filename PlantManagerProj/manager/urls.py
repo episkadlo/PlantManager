@@ -1,12 +1,15 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
 app_name = 'manager'
 
 urlpatterns = [
-    url(r'^$', views.ListPlants, name='list'),
-    url(r'newplant/$', views.CreatePlant.as_view(), name='createPlant'),
-    url(r'settings/$', views.Settings, name='settings'),
-    url(r'editplant/(?P<pk>\d+)/$', views.PlantEdit.as_view(), name='edit_plant'),
-    url(r'waterPlants/$', views.waterPlants, name='waterPlants')
+    path('', views.ListPlants, name='list'),
+    path('newplant/', views.CreatePlant.as_view(), name='createPlant'),
+    path('settings/', views.Settings, name='settings'),
+    path('waterPlants/', views.waterPlants, name='waterPlants'),
+    path('edit/<slug:slug>', views.PlantEdit.as_view(), name='editPlant'),
+    path('delete/<slug:slug>', views.PlantDelete.as_view(), name='deletePlant'),
+    path('deleteLoc/<int:pk>', views.LocationDelete.as_view(), name='deleteLoc'),
+    path('editLoc/<int:pk>', views.LocationEdit.as_view(), name='editLoc')
 ]
