@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% load bootstrap4 %}
+{% load bootstrap4 i18n %}
 
 {% block body_block%}
 
 <div class="container">
-    <h2>EDIT LOCATION</h2>
+    <h2>{% trans "EDIT LOCATION" %}</h2>
     <form method="POST">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <input type="submit" class='btn btn-info align-self-center mx-auto' value="Save">
+        <input type="submit" class='btn btn-info align-self-center mx-auto' value={% trans "Save" %}>
     </form>
 </div>
 

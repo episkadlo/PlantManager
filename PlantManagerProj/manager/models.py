@@ -14,7 +14,7 @@ User = get_user_model()
 class Location(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    room = models.CharField(max_length=50)
+    room = models.CharField(_('room'),max_length=50)
 
     
     class Meta:
@@ -29,19 +29,21 @@ class Location(models.Model):
 class Plant(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user")
-    name = models.CharField(max_length=30)
+    name = models.CharField(_('name'),max_length=30)
     slug = models.SlugField(allow_unicode=True, default="")
-    description = models.CharField(max_length=256, blank=True, default="")
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='location', blank=True, default="")
-    plant_image = models.ImageField(upload_to='media/plant_pics', blank=True)
-    last_water = models.DateField(default=date.today)
+    description = models.CharField(_('description'),max_length=256, blank=True, default="")
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='location', verbose_name=_('location'), blank=True, default="")
+    plant_image = models.ImageField(_('image'),upload_to='media/plant_pics', blank=True)
+    last_water = models.DateField(_('last watered'),default=date.today)
     water_every = models.PositiveIntegerField(
+        _('water every'),
         default=7,
         editable=True,
         validators=[MinValueValidator(1),
         MaxValueValidator(60)])
-    last_fertilize = models.DateField(default=date.today)
+    last_fertilize = models.DateField(_('last fertilized'), default=date.today)
     fertilize_every = models.PositiveIntegerField(
+        _('fertilize every'),
         default=30,
         editable=True,
         validators=[MinValueValidator(1),

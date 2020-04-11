@@ -1,0 +1,296 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-10 15:23+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: accounts/forms.py:14
+msgid "user name"
+msgstr "nazwa użytkownika"
+
+#: accounts/forms.py:15
+msgid "email address"
+msgstr "adres email"
+
+#: accounts/forms.py:16
+msgid "password"
+msgstr "hasło"
+
+#: accounts/forms.py:17
+msgid "repeat password"
+msgstr "powtórz hasło"
+
+#: accounts/templates/accounts/change_password.html:8
+msgid "Change your password"
+msgstr "Zmień hasło: "
+
+#: accounts/templates/accounts/change_password.html:13
+msgid "Save password"
+msgstr "Zapisz hasło"
+
+#: accounts/templates/accounts/login.html:8
+#: accounts/templates/accounts/login.html:13 templates/base.html:40
+msgid "Log in"
+msgstr "Zaloguj"
+
+#: accounts/templates/accounts/signup.html:8
+#: accounts/templates/accounts/signup.html:13 templates/base.html:43
+msgid "Sign up"
+msgstr "Rejestracja"
+
+#: manager/models.py:17
+msgid "room"
+msgstr "pomieszczenie"
+
+#: manager/models.py:21 manager/models.py:35
+msgid "location"
+msgstr "lokalizacja"
+
+#: manager/models.py:22
+msgid "locations"
+msgstr "lokalizacje"
+
+#: manager/models.py:32
+msgid "name"
+msgstr "nazwa"
+
+#: manager/models.py:34
+msgid "description"
+msgstr "opis"
+
+#: manager/models.py:36
+msgid "image"
+msgstr "zdjęcie"
+
+#: manager/models.py:37
+msgid "last watered"
+msgstr "ostatnie podlewanie "
+
+#: manager/models.py:39
+msgid "water every"
+msgstr "podlewaj co ... dni"
+
+#: manager/models.py:44
+msgid "last fertilized"
+msgstr "ostatnie nawiezienie"
+
+#: manager/models.py:46
+msgid "fertilize every"
+msgstr "nawoź co ... dni"
+
+#: manager/models.py:69
+msgid "plant"
+msgstr "roślina"
+
+#: manager/models.py:70
+msgid "plants"
+msgstr "rośliny"
+
+#: manager/templates/manager/createPlant.html:12
+msgid "Create"
+msgstr "Dodaj"
+
+#: manager/templates/manager/delete_location.html:7
+msgid "DELETE LOCATION"
+msgstr "USUŃ POMIESZCZENIE"
+
+#: manager/templates/manager/delete_location.html:10
+#, python-format
+msgid "Are you sure you want to delete %(object)s and all plants it contains?"
+msgstr ""
+"Czy na pewno chcesz usunąć pomieszczenie %(object)s i wszystkie rośliny "
+"które zawiera?"
+
+#: manager/templates/manager/delete_location.html:11
+msgid ""
+"If you wish to keep the plants, please go back edit them to relocate them to "
+"another location first!"
+msgstr ""
+"Jesli chcesz zachować rosliny, najpierw wróć do listy roślin i edytuj je by "
+"przesunąć je do innych pomieszczeń!"
+
+#: manager/templates/manager/delete_location.html:12
+#: manager/templates/manager/delete_plant.html:11
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: manager/templates/manager/delete_location.html:13
+#: manager/templates/manager/delete_plant.html:12
+msgid "Confirm"
+msgstr "Potwierdź"
+
+#: manager/templates/manager/delete_plant.html:7
+msgid "DELETE PLANT"
+msgstr " USUŃ ROŚLINĘ"
+
+#: manager/templates/manager/delete_plant.html:10
+msgid "Are you sure you want to delete "
+msgstr "Czy na pewno chcesz usunąć "
+
+#: manager/templates/manager/edit_location.html:7
+msgid "EDIT LOCATION"
+msgstr "EDYTUJ POMIESZCZENIE"
+
+#: manager/templates/manager/edit_location.html:11
+#: manager/templates/manager/edit_plant.html:11
+msgid "Save"
+msgstr "Zapisz"
+
+#: manager/templates/manager/edit_plant.html:7
+msgid "EDIT PLANT"
+msgstr "EDYTUJ ROŚLINĘ"
+
+#: manager/templates/manager/list_plants.html:10
+msgid "Add new plant"
+msgstr "Dodaj nową roślinę"
+
+#: manager/templates/manager/list_plants.html:24
+msgid "Take care of:"
+msgstr "Wymagają uwagi:"
+
+#: manager/templates/manager/list_plants.html:26
+#: manager/templates/manager/list_plants.html:50
+msgid "Plant: "
+msgstr "Roślina: "
+
+#: manager/templates/manager/list_plants.html:27
+#: manager/templates/manager/list_plants.html:51
+msgid "Location: "
+msgstr "Pomieszczenie: "
+
+#: manager/templates/manager/list_plants.html:28
+#: manager/templates/manager/list_plants.html:52
+msgid "Last watered: "
+msgstr "Ostatnio podlana: "
+
+#: manager/templates/manager/list_plants.html:29
+#: manager/templates/manager/list_plants.html:53
+msgid "Water next on: "
+msgstr "Kolejne podlewanie: "
+
+#: manager/templates/manager/list_plants.html:30
+#: manager/templates/manager/list_plants.html:54
+msgid "Water me!"
+msgstr "Podlej mnie! "
+
+#: manager/templates/manager/list_plants.html:31
+#: manager/templates/manager/list_plants.html:55
+msgid "Last fertilized: "
+msgstr "Ostatnie nawiezienie: "
+
+#: manager/templates/manager/list_plants.html:32
+#: manager/templates/manager/list_plants.html:56
+msgid "Fertilize next on: "
+msgstr "Kolejne nawiezienie: "
+
+#: manager/templates/manager/list_plants.html:33
+#: manager/templates/manager/list_plants.html:57
+msgid "Fertilize me!"
+msgstr "Nawieź mnie!"
+
+#: manager/templates/manager/list_plants.html:35
+#: manager/templates/manager/list_plants.html:59
+#: manager/templates/manager/settings.html:26
+msgid "Edit"
+msgstr "Edytuj"
+
+#: manager/templates/manager/list_plants.html:36
+#: manager/templates/manager/list_plants.html:60
+#: manager/templates/manager/settings.html:27
+msgid "Delete"
+msgstr "Usuń"
+
+#: manager/templates/manager/list_plants.html:40
+msgid "All your plants are up to date!"
+msgstr "Wszystkie rośliny są już ogarniete!"
+
+#: manager/templates/manager/list_plants.html:48
+msgid "Up to date:"
+msgstr "Aktualne:"
+
+#: manager/templates/manager/list_plants.html:64
+msgid "No plants are up to date!"
+msgstr "Żadna roślina nie jest jeszcze ogarnieta!"
+
+#: manager/templates/manager/list_plants.html:66
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: manager/templates/manager/list_plants.html:69
+msgid "No plants added yet!"
+msgstr "Nie dodano jeszcze żadnych roślin!"
+
+#: manager/templates/manager/settings.html:7
+msgid "User settings"
+msgstr "Ustawienia użytkownika"
+
+#: manager/templates/manager/settings.html:8
+msgid "Change your password: "
+msgstr "Zmień hasło: "
+
+#: manager/templates/manager/settings.html:8
+msgid "click here"
+msgstr "kliknij tutaj"
+
+#: manager/templates/manager/settings.html:17
+msgid "Your locations"
+msgstr "Twoje pomieszczenia"
+
+#: manager/templates/manager/settings.html:20
+msgid "Current locations:"
+msgstr "Obecne pomieszczenia"
+
+#: manager/templates/manager/settings.html:34
+msgid "No location created yet!"
+msgstr "Nie dodano jeszcze żadnych roślin!"
+
+#: manager/templates/manager/settings.html:40
+msgid "Add a new location:"
+msgstr "Dodaj nowe pomieszczenie"
+
+#: manager/templates/manager/settings.html:46
+msgid "Add"
+msgstr "Dodaj"
+
+#: templates/base.html:24 templates/base.html:37
+msgid "About"
+msgstr "O projekcie"
+
+#: templates/base.html:27
+msgid "Your plants"
+msgstr "Twoje rośliny"
+
+#: templates/base.html:30
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: templates/base.html:33
+msgid "Log Out"
+msgstr "Wyloguj"
+
+#: templates/index.html:9
+msgid "Your Plant Manager App"
+msgstr "Aplikacja do ogarnięcia twoich roślin"
+
+#: templates/index.html:11
+msgid "Start now!"
+msgstr "Zacznij teraz!"
+
+#~ msgid "DELETE Location"
+#~ msgstr "USUŃ pomieszczenie"

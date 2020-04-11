@@ -1,56 +1,53 @@
 {% extends "base.html" %}
-{% load bootstrap4 %}
+{% load bootstrap4 i18n %}
 
 {% block body_block%}
+    <div class='container'>
+
+        <h3>{% trans "User settings" %}</h3>
+            <p>{% trans "Change your password: " %}<a href="{% url 'accounts:change_password' %}">{% trans "click here" %}</a></p>
 
 
-
-<div class='container'>
-
-    <h3>User settings</h3>
-        <p>Change your password: <a href="{% url 'accounts:change_password' %}">click here</a></p>
-
-
-</div>
-
-<br>
-
-<div class='container'>
-
-    <h3>Your locations</h3>
-    <br> 
-
-    <h4>Current locations:</h4>
-
-    <ul>
-    {% if current_locations %}
-        {% for loc in current_locations %}
-        <li>{{loc.room}} 
-            <a class="btn btn-outline-success btn-sm" href="{% url 'manager:editLoc' pk=loc.pk %}" role="button"> Edit </a> 
-            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deleteLoc' pk=loc.pk %}" role="button"> Delete </a>
-        </li>
-        <br>
-        {% endfor %}
-    </ul>
-
-    {% else %}
-        <p>No location registered yet!</p>
-        
-    {% endif %}
+    </div>
 
     <br>
 
-    <h4>Add new location:</h4>
-    <form action="{% url 'manager:settings' %}" method='POST'>
-        {% csrf_token %}
+    <div class='container'>
 
-        {{ formset.as_p }} 
+        <h3>{% trans "Your locations" %}</h3>
+        <br> 
 
-        <input type="submit" class='btn btn-info align-self-center mx-auto' value="Add">
+        <h4>{% trans "Current locations:" %}</h4>
 
-    </form>
-    
-</div>
+        <ul>
+        {% if current_locations %}
+            {% for loc in current_locations %}
+            <li>{{loc.room}} 
+                <a class="btn btn-outline-success btn-sm" href="{% url 'manager:editLoc' pk=loc.pk %}" role="button"> {% trans "Edit" %} </a> 
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deleteLoc' pk=loc.pk %}" role="button"> {% trans "Delete" %} </a>
+            </li>
+            <br>
+            {% endfor %}
+        </ul>
+
+        {% else %}
+            <p>{% trans "No location created yet!" %}</p>
+            
+        {% endif %}
+
+        <br>
+
+        <h4>{% trans "Add a new location:" %}</h4>
+        <form action="{% url 'manager:settings' %}" method='POST'>
+            {% csrf_token %}
+
+            {{ formset.as_p }} 
+
+            <input type="submit" class='btn btn-info align-self-center mx-auto' value={% trans "Add" %}>
+
+        </form>
+        
+    </div>
 
 {% endblock %}
 

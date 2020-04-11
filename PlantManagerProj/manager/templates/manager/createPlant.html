@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap4 %}
+{% load bootstrap4 i18n%}
 
 {% block body_block%}
 
@@ -9,7 +9,7 @@
                 <form action="{% url 'manager:createPlant' %}" method='POST'>
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    <input type="submit" class='btn btn-info align-self-center mx-auto' value="Create">
+                    <input type="submit" class='btn btn-info align-self-center mx-auto' value={% trans "Create" %}>
 
             </form>
 

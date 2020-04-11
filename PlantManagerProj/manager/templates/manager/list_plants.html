@@ -22,22 +22,20 @@
                     <form method="POST" action="{% url 'manager:waterPlants' %}">
                         {% csrf_token %}
                         <h3>{% trans "Take care of:" %}</h3>
-                        {% blocktrans %}
                         {% for plant in takeCareOf %}
-                            <li> Plant: {{ plant.name }}</li>
-                            <li> Location: {{plant.location.room}}</li>
-                            <li> Last watered: {{ plant.last_water }}</li>
-                            <li> Water next on: {{plant.next_water }} </li>
-                            <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Water me!
-                            <li> Last watered: {{ plant.last_fertilize }}</li>
-                            <li> Fertilize next on: {{plant.next_fertilize }} </li>
-                            <input type="checkbox" name="fertilize_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Fertilize me!
+                            <li> {% trans "Plant: " %} {{ plant.name }}</li>
+                            <li> {% trans "Location: " %} {{plant.location.room}}</li>
+                            <li> {% trans "Last watered: " %} {{ plant.last_water }}</li>
+                            <li> {% trans "Water next on: " %} {{plant.next_water }} </li>
+                            <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> {% trans "Water me!"%}
+                            <li> {% trans "Last fertilized: "%} {{ plant.last_fertilize }}</li>
+                            <li> {% trans "Fertilize next on: " %} {{plant.next_fertilize }} </li>
+                            <input type="checkbox" name="fertilize_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> {% trans "Fertilize me!" %}
                             <br>
-                            <a class="btn btn-outline-info btn-sm" href="{% url 'manager:editPlant' slug=plant.slug %}" role="button"> Edit </a>
-                            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deletePlant' slug=plant.slug %}" role="button"> Delete </a>
+                            <a class="btn btn-outline-info btn-sm" href="{% url 'manager:editPlant' slug=plant.slug %}" role="button"> {% trans "Edit" %} </a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deletePlant' slug=plant.slug %}" role="button"> {% trans "Delete" %} </a>
                             <hr>
                             <br>
-                        {% endblocktrans %}
                         {% empty %}
                             <li>{% trans "All your plants are up to date!" %}</li>
                         {% endfor %}
@@ -47,29 +45,28 @@
                         <hr>
                         <br>
                         
-                        <h3>Up to date:</h3>
+                        <h3>{% trans "Up to date:" %}</h3>
                         {% for plant in upToDate %}
-                            <li> Plant: {{ plant.name }}</li>
-                            <li> Location: {{plant.location }}</li>
-                            <li> Slug: {{plant.slug }}</li>                           
-                            <li> Last watered: {{ plant.last_water }}</li>
-                            <li> Water next on: {{plant.next_water }} </li>
-                            <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Water me!
-                            <li> Last watered: {{ plant.last_fertilize }}</li>
-                            <li> Fertilize next on: {{plant.next_fertilize }} </li>
-                            <input type="checkbox" name="fertilize_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> Fertilize me!
+                            <li> {% trans "Plant: " %} {{ plant.name }}</li>
+                            <li> {% trans "Location: " %} {{plant.location.room }}</li>                         
+                            <li> {% trans "Last watered: " %} {{ plant.last_water }}</li>
+                            <li> {% trans "Water next on: " %} {{plant.next_water }} </li>
+                            <input type="checkbox" name="water_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> {% trans "Water me!" %}
+                            <li> {% trans "Last fertilized: "%} {{ plant.last_fertilize }}</li>
+                            <li> {% trans "Fertilize next on: " %} {{plant.next_fertilize }} </li>
+                            <input type="checkbox" name="fertilize_me" id="plant{{plant.pk}}" value='{{plant.pk}}'> {% trans "Fertilize me!" %}
                             <br>
-                            <a class="btn btn-outline-info btn-sm" href="{% url 'manager:editPlant' slug=plant.slug %}" role="button"> Edit </a>
-                            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deletePlant' slug=plant.slug %}" role="button"> Delete </a>
+                            <a class="btn btn-outline-info btn-sm" href="{% url 'manager:editPlant' slug=plant.slug %}" role="button"> {% trans "Edit" %} </a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'manager:deletePlant' slug=plant.slug %}" role="button"> {% trans "Delete" %} </a>
                             <hr>
                             <br>
                         {% empty %}
-                            <li>No plants added yet!</li>
+                            <li>{% trans "No plants are up to date!" %}</li>
                         {% endfor %}
-                            <input type="submit" class='btn btn-info align-self-center mx-auto' value="Update">
+                            <input type="submit" class='btn btn-info align-self-center mx-auto' value={% trans "Update" %}>
                     </form>
                 {% else %}
-                    <h4>No plants added yet!</h4>
+                    <h4>{% trans "No plants added yet!" %}</h4>
                 {% endif %}
             </div>
         </div>
